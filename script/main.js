@@ -1,6 +1,20 @@
 // У цьому завданні вам необхідно створити клас Student та розробляти методи всередині цього класу.
 
 // 1. У стдентів повинні бути наступні властивості: university, course, fullName, вони передаються при створенні студента(в конструктор).
+class Student {
+     constructor(university, course, fullName) {
+        this.university = university;
+        this.course = course;
+        this.fullName = fullName;
+     }
+
+     getInfo() {
+        console.log('Студент ' + this.course + ' курсу ' + this.university + ', ' + this.fullName);
+     }
+}
+
+const student1 = new Student('Вища Школа Психотерапії м.Одеса', '1', 'Остап Родоманський Бендер');
+console.log(student1);
 
 // 2. Створіть метод this.getInfo() -> "Студент 1го курсу Вищої Школи Психотерапії м.Одеса, Остап Родоманський Бендер", метод повертає сукупну інформацію про курс, учбовий заклад та імені студента.
 
