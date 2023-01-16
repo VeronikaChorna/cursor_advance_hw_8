@@ -8,6 +8,12 @@ class Student {
         this.university = university;
         this.course = course;
         this.fullName = fullName;
+      //   this.isDismissed;
+      //   if (this.isDismissed == true) {
+      //    return this.#marks = null;
+      //   } else if (this.isDismissed == false) {
+      //    return this.#marks;
+      //   }
      }
 
      getInfo() {
@@ -17,7 +23,10 @@ class Student {
      #marks = [5, 4, 4, 5];
 
      get marks() {
-        return this.#marks;
+      if(this.#isDismissed == false) {
+         return this.#marks = [5, 4, 4, 5];
+      } else if (this.#isDismissed == true)
+      return this.#marks = null;
      }
 
      set marks(mark) {
@@ -35,15 +44,23 @@ class Student {
       return avgMakrs;
      }
 
+     #isDismissed = false;
+     #isRecovered = false;
+
      dismiss() {
-      this.#marks = null;
+      if(this.#isRecovered = true) {
+         return this.#isDismissed = false;
+      } else {
+         return this.#isDismissed = true;
+      }
+      
      }
 
      recover() {
-      this.#marks = this.#marks;
+      return this.#isRecovered = true;
      }
      
-
+   
 
 }
 
@@ -60,15 +77,15 @@ console.log(student1);
 console.log('Avarage mark:', student1.getAverageMark());
 
 // 6. Створіть метод this.dismiss, який "виключить" студента. Після виклику цього методу – ставити студенту оцінки та отримувати їх більше не можна. (Ніяких помилок, просто повертається завжди null замість масиву оцінок)
-student1.dismiss();
+// student1.dismiss();
 
 
 console.log(student1.marks);
 
 // 7. Створіть метод this.recover, який дозволить поновити студента
-student1.recover();
+// student1.recover();
 
-console.log(student1.marks);
+// console.log(student1.marks);
 // ----------------------------------------------------Advanced--------------------------------------------------------------------------
 // 1. Створіть новий клас BudgetStudent, який повністю наслідує клас Student
 
