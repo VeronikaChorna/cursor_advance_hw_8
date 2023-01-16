@@ -8,12 +8,7 @@ class Student {
         this.university = university;
         this.course = course;
         this.fullName = fullName;
-      //   this.isDismissed;
-      //   if (this.isDismissed == true) {
-      //    return this.#marks = null;
-      //   } else if (this.isDismissed == false) {
-      //    return this.#marks;
-      //   }
+        this.isActive = true;
      }
 
      getInfo() {
@@ -23,10 +18,11 @@ class Student {
      #marks = [5, 4, 4, 5];
 
      get marks() {
-      if(this.#isDismissed == false) {
-         return this.#marks = [5, 4, 4, 5];
-      } else if (this.#isDismissed == true)
-      return this.#marks = null;
+         if(this.isActive) {
+            return this.#marks = [5, 4, 4, 5];
+         } else {
+            return null;
+         }
      }
 
      set marks(mark) {
@@ -37,31 +33,21 @@ class Student {
       const marks = this.#marks;
       const iterator = marks.values();
       let sum = 0;
-        for (const mark of iterator) {
-            sum += mark;
-        }
+      for (const mark of iterator) {
+         sum += mark;
+      }
       const avgMakrs = (sum / marks.length).toFixed(1);
       return avgMakrs;
      }
 
-     #isDismissed = false;
-     #isRecovered = false;
-
      dismiss() {
-      if(this.#isRecovered = true) {
-         return this.#isDismissed = false;
-      } else {
-         return this.#isDismissed = true;
-      }
-      
+      return this.isActive = false;
+
      }
 
      recover() {
-      return this.#isRecovered = true;
+      return this.isActive = true;
      }
-     
-   
-
 }
 
 const student1 = new Student('Вищої Школи Психотерапії м.Одеса', '1го курсу', 'Остап Родоманський Бендер');
@@ -74,29 +60,35 @@ student1.marks = 5;
 console.log(student1);
 
 // 5. Створіть метод отримання середнього балу this.getAverageMark() -> 4.6
-console.log('Avarage mark:', student1.getAverageMark());
+console.log('Avarage marks:', student1.getAverageMark());
 
 // 6. Створіть метод this.dismiss, який "виключить" студента. Після виклику цього методу – ставити студенту оцінки та отримувати їх більше не можна. (Ніяких помилок, просто повертається завжди null замість масиву оцінок)
-// student1.dismiss();
-
-
-console.log(student1.marks);
+student1.dismiss();
+console.log('Students mark after dismiss:', student1.marks);
 
 // 7. Створіть метод this.recover, який дозволить поновити студента
-// student1.recover();
-
-// console.log(student1.marks);
+student1.recover();
+console.log('Students mark after recover:', student1.marks);
 // ----------------------------------------------------Advanced--------------------------------------------------------------------------
 // 1. Створіть новий клас BudgetStudent, який повністю наслідує клас Student
 
 class BudgetStudent extends Student {
     constructor(university, course, fullName) {
-        super(university, course, fullName)
+        super(university, course, fullName);
+        setInterval(() => this.getScolarship(), 1000);
+    }
+
+    getScolarship() {
+      let avgMark = this.getAverageMark();
+      if(this.isActive && avgMark >= 4.0) {
+         console.log('Ви отримали 1400 грн. стипендії');
+      } else {
+         console.log('Нема грошей');
+      }
     }
 }
 
 const student2 = new BudgetStudent('Вищої Школи Психотерапії м.Одеса', '1го курсу', 'Остап Родоманський Бендер');
-console.log({student1, student2});
 // 2. Бюджетний студент може отримати стипендію за допомогою методу this.getScholarship. Отримання стипендії супроводжується виведенням інформації в консоль: Ви отримали 1400 грн. стипендії
 // 3. Метод отримання стипендії автоматично викликається кожні 30 секунд післе створення об'єкту. Підказка: викликайте його в constructor
 // 4. Студент отримує стипендію тільки в тому випадку, якщо середній бал у нього вище або дорівнює 4.0
