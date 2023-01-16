@@ -37,7 +37,6 @@ class Student {
 
      dismiss() {
       return this.isActive = false;
-
      }
 
      recover() {
